@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import Home from "./pages/Home";
 import Meetups from "./pages/Meetups";
+import Clubs from "./pages/Clubs";
+import ClubDetail from "./pages/ClubDetail";
 import Calendar from "./pages/Calendar";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
@@ -23,6 +25,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/meetups" element={<Meetups />} />
+          <Route path="/clubs" element={<Clubs />} />
+          <Route path="/clubs/:id" element={<ClubDetail />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/community" element={<Community />} />
           <Route path="/profile" element={<Profile />} />

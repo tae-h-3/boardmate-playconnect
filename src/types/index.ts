@@ -59,3 +59,31 @@ export interface Cafe {
   imageUrl: string;
   rating: number;
 }
+
+export interface Club {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  memberCount: number;
+  createdAt: string;
+  adminId: string;
+  adminName: string;
+  members: string[];
+  gameTypes: string[];
+}
+
+export interface ClubMessage {
+  id: string;
+  clubId: string;
+  userId: string;
+  userName: string;
+  userAvatar: string;
+  content: string;
+  timestamp: string;
+}
+
+export interface ClubMeetup extends Meetup {
+  clubId: string;
+  isClubOnly: boolean;
+}

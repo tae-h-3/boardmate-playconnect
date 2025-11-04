@@ -1,4 +1,4 @@
-import { User, Meetup, CalendarEvent, Post, Cafe } from "@/types";
+import { User, Meetup, CalendarEvent, Post, Cafe, Club, ClubMessage } from "@/types";
 
 export const currentUser: User = {
   id: "1",
@@ -163,5 +163,74 @@ export const cafes: Cafe[] = [
     availableGames: ["D&D Materials", "Magic: The Gathering", "Warhammer", "Chess", "Go"],
     imageUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
     rating: 4.9,
+  },
+];
+
+export const clubs: Club[] = [
+  {
+    id: "cl1",
+    name: "서울 보드게임 동호회",
+    description: "서울에서 활동하는 보드게임 동호회입니다. 매주 주말마다 모여서 다양한 게임을 즐깁니다!",
+    imageUrl: "https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=800&q=80",
+    memberCount: 24,
+    createdAt: "2024-01-15",
+    adminId: "1",
+    adminName: "Alex Chen",
+    members: ["1", "2", "3", "4", "5", "6"],
+    gameTypes: ["Strategy", "Party", "RPG"],
+  },
+  {
+    id: "cl2",
+    name: "Catan Masters",
+    description: "Catan을 사랑하는 사람들의 모임. 초보부터 고수까지 모두 환영합니다!",
+    imageUrl: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800&q=80",
+    memberCount: 15,
+    createdAt: "2024-02-20",
+    adminId: "h1",
+    adminName: "Sarah Mitchell",
+    members: ["1", "7", "8", "9"],
+    gameTypes: ["Strategy"],
+  },
+  {
+    id: "cl3",
+    name: "주말 파티게임 클럽",
+    description: "가볍게 즐기는 파티게임 위주의 클럽입니다. 누구나 쉽게 참여 가능!",
+    imageUrl: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&q=80",
+    memberCount: 32,
+    createdAt: "2024-03-10",
+    adminId: "h2",
+    adminName: "Mike Johnson",
+    members: ["1", "10", "11", "12", "13"],
+    gameTypes: ["Party", "Family"],
+  },
+];
+
+export const clubMessages: ClubMessage[] = [
+  {
+    id: "cm1",
+    clubId: "cl1",
+    userId: "2",
+    userName: "Sophie Turner",
+    userAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sophie",
+    content: "다음 모임은 언제 하나요? 기대됩니다! 🎲",
+    timestamp: "2025-11-04T09:30:00Z",
+  },
+  {
+    id: "cm2",
+    clubId: "cl1",
+    userId: "1",
+    userName: "Alex Chen",
+    userAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+    content: "이번 토요일 저녁 7시에 Downtown Café에서 만나요!",
+    timestamp: "2025-11-04T10:15:00Z",
+  },
+  {
+    id: "cm3",
+    clubId: "cl1",
+    userId: "3",
+    userName: "John Smith",
+    userAvatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
+    content: "저도 참석할게요! 👍",
+    timestamp: "2025-11-04T11:00:00Z",
   },
 ];
