@@ -87,3 +87,58 @@ export interface ClubMeetup extends Meetup {
   clubId: string;
   isClubOnly: boolean;
 }
+
+export interface Group {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  region: string;
+  district: string;
+  memberCount: number;
+  type: "동호회" | "동아리" | "자율모임";
+  contactLink: string;
+  tags: string[];
+}
+
+export interface MarketplaceItem {
+  id: string;
+  userId: string;
+  userName: string;
+  userAvatar: string;
+  category: "판매" | "구매" | "교환" | "나눔";
+  title: string;
+  gameName: string;
+  price?: number;
+  condition?: string;
+  region: string;
+  description: string;
+  imageUrl?: string;
+  timestamp: string;
+  status: "활성" | "거래중" | "완료";
+  views: number;
+  comments: number;
+}
+
+export interface CommunityPost {
+  id: string;
+  userId: string;
+  userName: string;
+  userAvatar: string;
+  type: "정보" | "공유" | "질문" | "후기" | "잡담" | "기타";
+  title: string;
+  content: string;
+  imageUrl?: string;
+  likes: number;
+  comments: number;
+  timestamp: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  userId: string;
+  userName: string;
+  userAvatar: string;
+  content: string;
+  timestamp: string;
+}

@@ -6,10 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import Home from "./pages/Home";
 import Meetups from "./pages/Meetups";
+import Groups from "./pages/Groups";
 import Clubs from "./pages/Clubs";
 import ClubDetail from "./pages/ClubDetail";
+import Marketplace from "./pages/Marketplace";
 import Calendar from "./pages/Calendar";
-import Community from "./pages/Community";
+import EnhancedCommunity from "./pages/EnhancedCommunity";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
@@ -25,10 +27,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/meetups" element={<Meetups />} />
+          <Route path="/groups" element={<Groups />} />
           <Route path="/clubs" element={<Clubs />} />
           <Route path="/clubs/:id" element={<ClubDetail />} />
+          <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/calendar" element={<Calendar />} />
-          <Route path="/community" element={<Community />} />
+          <Route path="/community" element={<EnhancedCommunity />} />
           <Route path="/profile" element={<Profile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

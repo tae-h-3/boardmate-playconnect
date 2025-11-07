@@ -1,14 +1,16 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, Calendar, Users, User, Compass, UsersRound } from "lucide-react";
+import { Home, Calendar, Users, User, Compass, UsersRound, MapPin, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { path: "/", label: "Home", icon: Home },
-  { path: "/meetups", label: "Meetups", icon: Compass },
-  { path: "/clubs", label: "Clubs", icon: UsersRound },
-  { path: "/calendar", label: "Calendar", icon: Calendar },
-  { path: "/community", label: "Community", icon: Users },
-  { path: "/profile", label: "Profile", icon: User },
+  { path: "/", label: "홈", icon: Home },
+  { path: "/meetups", label: "모임", icon: Compass },
+  { path: "/groups", label: "동호회", icon: MapPin },
+  { path: "/clubs", label: "클럽", icon: UsersRound },
+  { path: "/marketplace", label: "중고", icon: ShoppingBag },
+  { path: "/calendar", label: "캘린더", icon: Calendar },
+  { path: "/community", label: "커뮤니티", icon: Users },
+  { path: "/profile", label: "프로필", icon: User },
 ];
 
 export const Navigation = () => {
