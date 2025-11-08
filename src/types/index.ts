@@ -142,3 +142,67 @@ export interface ChatMessage {
   content: string;
   timestamp: string;
 }
+
+export interface Event {
+  id: string;
+  type: "대회" | "체험단";
+  title: string;
+  description: string;
+  imageUrl: string;
+  region: string;
+  startDate: string;
+  endDate: string;
+  prize?: string;
+  maxParticipants: number;
+  currentParticipants: number;
+  status: "모집중" | "마감";
+  organizerId: string;
+  organizerName: string;
+  participants: string[];
+}
+
+export interface Friend {
+  id: string;
+  name: string;
+  avatar: string;
+  status: "온라인" | "오프라인";
+  mutualFriends: number;
+}
+
+export interface FriendRequest {
+  id: string;
+  fromUserId: string;
+  fromUserName: string;
+  fromUserAvatar: string;
+  timestamp: string;
+}
+
+export interface BoardGame {
+  id: string;
+  name: string;
+  category: string[];
+  description: string;
+  imageUrl: string;
+  videoUrl?: string;
+  rating: number;
+  reviewCount: number;
+  minPlayers: number;
+  maxPlayers: number;
+  playTime: string;
+  age: string;
+  difficulty: string;
+  rulesDownloadUrl?: string;
+  relatedEvents: string[];
+}
+
+export interface Review {
+  id: string;
+  userId: string;
+  userName: string;
+  userAvatar: string;
+  gameId: string;
+  rating: number;
+  content: string;
+  timestamp: string;
+  likes: number;
+}

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Calendar, Users, Trophy, MapPin } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar, Users, Trophy, MapPin, Bell, MessageSquare, Award } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   return (
@@ -85,6 +86,91 @@ export default function Home() {
             </p>
           </Card>
         </div>
+      </section>
+
+      {/* Dashboard Section */}
+      <section className="container mx-auto px-6 py-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          최신 소식
+        </h2>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* 대회 공고 */}
+          <Card className="hover:shadow-card transition-smooth border-2">
+            <CardHeader>
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="default" className="bg-primary">대회</Badge>
+                <Award className="w-5 h-5 text-primary" />
+              </div>
+              <CardTitle className="text-xl">전국 보드게임 챔피언십</CardTitle>
+              <CardDescription>상금 100만원 | 모집중</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                최고의 보드게임 플레이어를 가리는 전국 대회에 참가하세요!
+              </p>
+              <Link to="/events">
+                <Button size="sm" className="w-full">자세히 보기</Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* 체험단 모집 */}
+          <Card className="hover:shadow-card transition-smooth border-2">
+            <CardHeader>
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="secondary">체험단</Badge>
+                <Users className="w-5 h-5 text-secondary" />
+              </div>
+              <CardTitle className="text-xl">신작 게임 체험단 모집</CardTitle>
+              <CardDescription>20명 모집 | 5명 남음</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                출시 전 신작 보드게임을 먼저 체험해보실 분을 찾습니다.
+              </p>
+              <Link to="/events">
+                <Button size="sm" variant="secondary" className="w-full">지원하기</Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* 최신 커뮤니티 글 */}
+          <Card className="hover:shadow-card transition-smooth border-2">
+            <CardHeader>
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="outline">커뮤니티</Badge>
+                <MessageSquare className="w-5 h-5 text-accent" />
+              </div>
+              <CardTitle className="text-xl">초보자를 위한 게임 추천</CardTitle>
+              <CardDescription>후기 | 2시간 전</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                보드게임을 처음 시작하는 분들을 위한 추천 게임 리스트...
+              </p>
+              <Link to="/community">
+                <Button size="sm" variant="outline" className="w-full">글 보기</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* 알림 배너 */}
+        <Card className="p-6 bg-gradient-primary text-white border-none shadow-soft">
+          <div className="flex items-start gap-4">
+            <Bell className="w-6 h-6 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="text-xl font-bold mb-2">중요 공지사항</h3>
+              <p className="text-white/90 mb-4">
+                2024년 1월 신년 특별 이벤트가 진행됩니다! 모든 모임 참가자에게 2배 포인트를 지급합니다.
+              </p>
+              <Button variant="secondary" size="sm">
+                자세히 보기
+              </Button>
+            </div>
+          </div>
+        </Card>
       </section>
 
       {/* CTA Section */}

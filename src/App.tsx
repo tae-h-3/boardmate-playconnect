@@ -10,9 +10,11 @@ import Groups from "./pages/Groups";
 import Clubs from "./pages/Clubs";
 import ClubDetail from "./pages/ClubDetail";
 import Marketplace from "./pages/Marketplace";
+import Events from "./pages/Events";
 import Calendar from "./pages/Calendar";
 import EnhancedCommunity from "./pages/EnhancedCommunity";
 import Profile from "./pages/Profile";
+import BoardGameDetail from "./pages/BoardGameDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,9 +33,11 @@ const App = () => (
           <Route path="/clubs" element={<Clubs />} />
           <Route path="/clubs/:id" element={<ClubDetail />} />
           <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/community" element={<EnhancedCommunity />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/games/:id" element={<BoardGameDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
