@@ -9,6 +9,8 @@ import Meetups from "./pages/Meetups";
 import Groups from "./pages/Groups";
 import Clubs from "./pages/Clubs";
 import ClubDetail from "./pages/ClubDetail";
+import Cafes from "./pages/Cafes";
+import CafeDetail from "./pages/CafeDetail";
 import Marketplace from "./pages/Marketplace";
 import Events from "./pages/Events";
 import Calendar from "./pages/Calendar";
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/groups" element={<Groups />} />
           <Route path="/clubs" element={<Clubs />} />
           <Route path="/clubs/:id" element={<ClubDetail />} />
+          <Route path="/cafes" element={<Cafes />} />
+          <Route path="/cafes/:id" element={<CafeDetail />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/events" element={<Events />} />
           <Route path="/calendar" element={<Calendar />} />

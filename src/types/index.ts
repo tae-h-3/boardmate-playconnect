@@ -54,10 +54,46 @@ export interface Cafe {
   id: string;
   name: string;
   address: string;
+  region: string;
+  district: string;
   openingHours: string;
   availableGames: string[];
   imageUrl: string;
   rating: number;
+  pricePerHour: number;
+  totalTables: number;
+  availableTables: number;
+  phone: string;
+  isPartner: boolean;
+  features: string[];
+}
+
+export interface CafeReservation {
+  id: string;
+  cafeId: string;
+  cafeName: string;
+  userId: string;
+  userName: string;
+  groupId?: string;
+  groupName?: string;
+  date: string;
+  time: string;
+  duration: number;
+  numberOfPeople: number;
+  tableNumber?: number;
+  status: "대기중" | "승인됨" | "거절됨" | "완료";
+  specialRequests?: string;
+  timestamp: string;
+}
+
+export interface TableStatus {
+  tableNumber: number;
+  capacity: number;
+  status: "사용가능" | "사용중" | "예약됨";
+  currentUsage?: {
+    startTime: string;
+    estimatedEndTime: string;
+  };
 }
 
 export interface Club {
@@ -205,4 +241,17 @@ export interface Review {
   content: string;
   timestamp: string;
   likes: number;
+}
+
+export interface KakaoShareData {
+  meetupId: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  link: string;
+  votes: {
+    going: string[];
+    notGoing: string[];
+    maybe: string[];
+  };
 }

@@ -6,11 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { MapPin, Calendar, Users, Clock, Search, Plus } from "lucide-react";
+import { MapPin, Calendar, Users, Clock, Search, Plus, MessageCircle, Coffee } from "lucide-react";
 import { meetups, currentUser } from "@/data/dummy";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export default function Meetups() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState<string>("All");
   const [joinedMeetups, setJoinedMeetups] = useState<string[]>(
@@ -24,7 +27,9 @@ export default function Meetups() {
     location: "",
     maxParticipants: "",
     gameType: "Strategy",
-    description: ""
+    description: "",
+    linkCafe: false,
+    cafeId: ""
   });
 
   const gameTypes = ["All", "Strategy", "Party", "RPG", "Family"];
@@ -46,6 +51,7 @@ export default function Meetups() {
 
   const handleCreateMeetup = () => {
     console.log("Creating meetup:", newMeetup);
+    toast.success("모임이 생성되었습니다!");
     setIsCreateModalOpen(false);
     setNewMeetup({
       title: "",
@@ -54,8 +60,16 @@ export default function Meetups() {
       location: "",
       maxParticipants: "",
       gameType: "Strategy",
-      description: ""
+      description: "",
+      linkCafe: false,
+      cafeId: ""
     });
+  };
+
+  const handleShareKakao = (meetupId: string) => {
+    // 실제로는 카카오톡 SDK를 통해 공유
+    toast.success("카카오톡으로 모임이 공유되었습니다!");
+    console.log("Sharing to KakaoTalk:", meetupId);
   };
 
   return (
@@ -155,10 +169,15 @@ export default function Meetups() {
                       onClick={() => handleJoin(meetup.id)}
                       disabled={!isJoined && isFull}
                     >
-                      {isJoined ? "Leave" : isFull ? "Full" : "Join"}
+                      {isJoined ? "나가기" : isFull ? "마감" : "참여하기"}
                     </Button>
-                    <Button variant="outline" className="flex-1">
-                      Details
+                    <Button 
+                      variant="outline" 
+                      size="icon"
+                      onClick={() => handleShareKakao(meetup.id)}
+                      title="카카오톡으로 공유"
+                    >
+                      <MessageCircle className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
@@ -258,22 +277,50 @@ export default function Meetups() {
               </div>
             </div>
             <div>
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">설명</Label>
               <Textarea
                 id="description"
                 value={newMeetup.description}
                 onChange={(e) => setNewMeetup({ ...newMeetup, description: e.target.value })}
-                placeholder="Describe your meetup..."
+                placeholder="모임에 대해 설명해주세요..."
                 rows={4}
               />
             </div>
+            <div className="flex items-center gap-2 p-4 bg-muted rounded-lg">
+              <input
+                type="checkbox"
+                id="linkCafe"
+                checked={newMeetup.linkCafe}
+                onChange={(e) => setNewMeetup({ ...newMeetup, linkCafe: e.target.checked })}
+                className="w-4 h-4"
+              />
+              <Label htmlFor="linkCafe" className="cursor-pointer">
+                제휴 카페와 연동하기
+              </Label>
+            </div>
+            {newMeetup.linkCafe && (
+              <div>
+                <Label>카페 선택</Label>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => navigate("/cafes")}
+                >
+                  <Coffee className="w-4 h-4 mr-2" />
+                  카페 찾아보기
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2">
+                  * 카페를 선택하면 자동으로 예약이 연동됩니다
+                </p>
+              </div>
+            )}
           </div>
           <div className="flex gap-3 justify-end">
             <Button variant="outline" onClick={() => setIsCreateModalOpen(false)}>
-              Cancel
+              취소
             </Button>
             <Button onClick={handleCreateMeetup}>
-              Create Meetup
+              모임 만들기
             </Button>
           </div>
         </DialogContent>
