@@ -3,10 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Users, Trophy, MapPin, Bell, MessageSquare, Award } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-
 export default function Home() {
-  return (
-    <div className="min-h-screen pb-20 md:pb-8 md:pt-20">
+  return <div className="min-h-screen pb-20 md:pb-8 md:pt-20">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-hero py-20 px-6">
         <div className="container mx-auto text-center relative z-10">
@@ -26,7 +24,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link to="/calendar">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8">
+              <Button size="lg" variant="outline" className="border-white hover:bg-white/10 text-lg px-8 text-[#7a61bc]">
                 캘린더 보기
               </Button>
             </Link>
@@ -189,6 +187,5 @@ export default function Home() {
           </Link>
         </Card>
       </section>
-    </div>
-  );
+    </div>;
 }
