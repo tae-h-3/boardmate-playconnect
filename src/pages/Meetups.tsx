@@ -32,7 +32,7 @@ export default function Meetups() {
     cafeId: ""
   });
 
-  const gameTypes = ["All", "Strategy", "Party", "RPG", "Family"];
+  const gameTypes = ["전체", "전략", "파티", "RPG", "가족"];
 
   const filteredMeetups = meetups.filter(meetup => {
     const matchesSearch = meetup.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -77,8 +77,8 @@ export default function Meetups() {
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Discover Meetups</h1>
-          <p className="text-muted-foreground text-lg">Find your next board game adventure</p>
+          <h1 className="text-4xl font-bold mb-2">모임 찾기</h1>
+          <p className="text-muted-foreground text-lg">다음 보드게임 모험을 찾아보세요</p>
         </div>
 
         {/* Search & Filters */}
@@ -87,7 +87,7 @@ export default function Meetups() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search meetups or locations..."
+              placeholder="모임이나 장소 검색..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 h-12 text-lg"
@@ -113,8 +113,8 @@ export default function Meetups() {
           <div className="relative h-64 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
             <div className="text-center">
               <MapPin className="w-16 h-16 mx-auto mb-4 text-primary opacity-50" />
-              <p className="text-muted-foreground">Map Preview</p>
-              <p className="text-sm text-muted-foreground mt-1">Google Maps / Kakao Map Integration</p>
+              <p className="text-muted-foreground">지도 미리보기</p>
+              <p className="text-sm text-muted-foreground mt-1">구글 지도 / 카카오맵 연동</p>
             </div>
           </div>
         </Card>
@@ -155,11 +155,11 @@ export default function Meetups() {
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <Users className="w-4 h-4 text-accent" />
-                      <span>{meetup.currentParticipants}/{meetup.maxParticipants} participants</span>
+                      <span>{meetup.currentParticipants}/{meetup.maxParticipants} 참가자</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <Clock className="w-4 h-4 text-muted-foreground" />
-                      <span>Hosted by {meetup.hostName}</span>
+                      <span>주최자: {meetup.hostName}</span>
                     </div>
                   </div>
 
@@ -188,8 +188,8 @@ export default function Meetups() {
 
         {filteredMeetups.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-2xl text-muted-foreground mb-4">No meetups found</p>
-            <p className="text-muted-foreground">Try adjusting your search or filters</p>
+            <p className="text-2xl text-muted-foreground mb-4">모임을 찾을 수 없습니다</p>
+            <p className="text-muted-foreground">검색어나 필터를 조정해보세요</p>
           </div>
         )}
       </div>
@@ -206,24 +206,24 @@ export default function Meetups() {
         </DialogTrigger>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl">Create New Meetup</DialogTitle>
+            <DialogTitle className="text-2xl">새 모임 만들기</DialogTitle>
             <DialogDescription>
-              Fill in the details to create a new board game meetup
+              보드게임 모임을 만들기 위한 세부 정보를 입력하세요
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div>
-              <Label htmlFor="title">Title</Label>
+              <Label htmlFor="title">제목</Label>
               <Input
                 id="title"
                 value={newMeetup.title}
                 onChange={(e) => setNewMeetup({ ...newMeetup, title: e.target.value })}
-                placeholder="e.g., Catan Tournament Night"
+                placeholder="예: 카탄 토너먼트의 밤"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="date">Date</Label>
+                <Label htmlFor="date">날짜</Label>
                 <Input
                   id="date"
                   type="date"
@@ -232,7 +232,7 @@ export default function Meetups() {
                 />
               </div>
               <div>
-                <Label htmlFor="time">Time</Label>
+                <Label htmlFor="time">시간</Label>
                 <Input
                   id="time"
                   type="time"
@@ -242,37 +242,37 @@ export default function Meetups() {
               </div>
             </div>
             <div>
-              <Label htmlFor="location">Location</Label>
+              <Label htmlFor="location">장소</Label>
               <Input
                 id="location"
                 value={newMeetup.location}
                 onChange={(e) => setNewMeetup({ ...newMeetup, location: e.target.value })}
-                placeholder="e.g., Downtown Board Game Café"
+                placeholder="예: 시내 보드게임 카페"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="maxParticipants">Max Participants</Label>
+                <Label htmlFor="maxParticipants">최대 참가자 수</Label>
                 <Input
                   id="maxParticipants"
                   type="number"
                   value={newMeetup.maxParticipants}
                   onChange={(e) => setNewMeetup({ ...newMeetup, maxParticipants: e.target.value })}
-                  placeholder="e.g., 12"
+                  placeholder="예: 12"
                 />
               </div>
               <div>
-                <Label htmlFor="gameType">Game Type</Label>
+                <Label htmlFor="gameType">게임 유형</Label>
                 <select
                   id="gameType"
                   value={newMeetup.gameType}
                   onChange={(e) => setNewMeetup({ ...newMeetup, gameType: e.target.value })}
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <option value="Strategy">Strategy</option>
-                  <option value="Party">Party</option>
+                  <option value="전략">전략</option>
+                  <option value="파티">파티</option>
                   <option value="RPG">RPG</option>
-                  <option value="Family">Family</option>
+                  <option value="가족">가족</option>
                 </select>
               </div>
             </div>
