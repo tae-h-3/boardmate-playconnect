@@ -25,18 +25,18 @@ export default function Profile() {
   ];
 
   const achievements = [
-    { id: 1, name: "First Meetup", icon: "🎲", earned: true },
-    { id: 2, name: "10 Games Played", icon: "🎯", earned: true },
-    { id: 3, name: "Social Butterfly", icon: "🦋", earned: true },
-    { id: 4, name: "Tournament Winner", icon: "🏆", earned: false },
-    { id: 5, name: "Regular Attendee", icon: "⭐", earned: true },
-    { id: 6, name: "Community Leader", icon: "👑", earned: false },
+    { id: 1, name: "첫 모임", icon: "🎲", earned: true },
+    { id: 2, name: "10게임 플레이", icon: "🎯", earned: true },
+    { id: 3, name: "사교적인 사람", icon: "🦋", earned: true },
+    { id: 4, name: "토너먼트 우승", icon: "🏆", earned: false },
+    { id: 5, name: "단골 참석자", icon: "⭐", earned: true },
+    { id: 6, name: "커뮤니티 리더", icon: "👑", earned: false },
   ];
 
   const stats = [
-    { label: "Total Points", value: currentUser.points, icon: Trophy, color: "text-primary" },
-    { label: "Meetups Attended", value: currentUser.attendanceCount, icon: Calendar, color: "text-secondary" },
-    { label: "Favorite Games", value: currentUser.favoriteGames.length, icon: Star, color: "text-accent" },
+    { label: "총 포인트", value: currentUser.points, icon: Trophy, color: "text-primary" },
+    { label: "참석한 모임", value: currentUser.attendanceCount, icon: Calendar, color: "text-secondary" },
+    { label: "좋아하는 게임", value: currentUser.favoriteGames.length, icon: Star, color: "text-accent" },
   ];
 
   return (

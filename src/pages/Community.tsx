@@ -62,8 +62,8 @@ export default function Community() {
       <div className="container mx-auto px-6 py-8 max-w-3xl">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Community Feed</h1>
-          <p className="text-muted-foreground text-lg">Share your game night experiences</p>
+          <h1 className="text-4xl font-bold mb-2">커뮤니티 피드</h1>
+          <p className="text-muted-foreground text-lg">게임 나이트 경험을 공유하세요</p>
         </div>
 
         {/* Create Post */}
@@ -74,7 +74,7 @@ export default function Community() {
             </Avatar>
             <div className="flex-1">
               <Textarea
-                placeholder="Share your board game experience..."
+                placeholder="보드게임 경험을 공유해보세요..."
                 value={newPostContent}
                 onChange={(e) => setNewPostContent(e.target.value)}
                 className="min-h-24 mb-3 resize-none"
@@ -82,11 +82,11 @@ export default function Community() {
               <div className="flex justify-between items-center">
                 <Button variant="outline" size="sm">
                   <ImageIcon className="w-4 h-4 mr-2" />
-                  Add Photo
+                  사진 추가
                 </Button>
                 <Button onClick={handleCreatePost} disabled={!newPostContent.trim()}>
                   <Send className="w-4 h-4 mr-2" />
-                  Post
+                  게시
                 </Button>
               </div>
             </div>
@@ -147,8 +147,8 @@ export default function Community() {
 
         {postList.length === 0 && (
           <Card className="p-12 text-center">
-            <p className="text-2xl text-muted-foreground mb-2">No posts yet</p>
-            <p className="text-muted-foreground">Be the first to share your game night story!</p>
+            <p className="text-2xl text-muted-foreground mb-2">아직 게시글이 없습니다</p>
+            <p className="text-muted-foreground">게임 나이트 이야기를 처음으로 공유해보세요!</p>
           </Card>
         )}
       </div>

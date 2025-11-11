@@ -46,8 +46,8 @@ export default function Calendar() {
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Event Calendar</h1>
-          <p className="text-muted-foreground text-lg">Manage your game night schedule</p>
+          <h1 className="text-4xl font-bold mb-2">이벤트 캘린더</h1>
+          <p className="text-muted-foreground text-lg">게임 나이트 일정을 관리하세요</p>
         </div>
 
         {/* Calendar View - Simplified List View */}
@@ -83,7 +83,7 @@ export default function Calendar() {
                           </div>
                           <div className="flex items-center gap-2 text-sm">
                             <Users className="w-4 h-4 text-accent" />
-                            <span>{event.attendees.length} attending</span>
+                            <span>{event.attendees.length}명 참석</span>
                           </div>
                         </div>
                         <Badge className="mt-3">{event.gameType}</Badge>
@@ -94,7 +94,7 @@ export default function Calendar() {
                     {currentStatus && (
                       <div className="mt-4">
                         <Badge className={getStatusColor(currentStatus)}>
-                          Your status: {currentStatus === "going" ? "✅ Going" : currentStatus === "not-going" ? "❌ Not Going" : "❓ Maybe"}
+                          내 상태: {currentStatus === "going" ? "✅ 참석" : currentStatus === "not-going" ? "❌ 불참" : "❓ 미정"}
                         </Badge>
                       </div>
                     )}
@@ -108,7 +108,7 @@ export default function Calendar() {
                       onClick={() => updateAttendance(event.id, "going")}
                     >
                       <Check className="w-4 h-4 mr-2" />
-                      Going
+                      참석
                     </Button>
                     <Button
                       variant={currentStatus === "maybe" ? "default" : "outline"}
@@ -116,7 +116,7 @@ export default function Calendar() {
                       onClick={() => updateAttendance(event.id, "maybe")}
                     >
                       <HelpCircle className="w-4 h-4 mr-2" />
-                      Maybe
+                      미정
                     </Button>
                     <Button
                       variant={currentStatus === "not-going" ? "destructive" : "outline"}
@@ -124,7 +124,7 @@ export default function Calendar() {
                       onClick={() => updateAttendance(event.id, "not-going")}
                     >
                       <X className="w-4 h-4 mr-2" />
-                      Can't Go
+                      불참
                     </Button>
                   </div>
                 </div>
@@ -136,8 +136,8 @@ export default function Calendar() {
         {events.length === 0 && (
           <Card className="p-12 text-center">
             <CalendarIcon className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <p className="text-2xl text-muted-foreground mb-2">No upcoming events</p>
-            <p className="text-muted-foreground">Check out the Meetups page to join some game nights!</p>
+            <p className="text-2xl text-muted-foreground mb-2">다가오는 이벤트가 없습니다</p>
+            <p className="text-muted-foreground">모임 페이지에서 게임 나이트에 참여해보세요!</p>
           </Card>
         )}
       </div>
