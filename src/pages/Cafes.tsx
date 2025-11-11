@@ -128,6 +128,10 @@ export default function Cafes() {
                   <img
                     src={cafe.imageUrl}
                     alt={cafe.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = "/placeholder.svg";
+                    }}
                     className="w-full h-full object-cover"
                   />
                   {cafe.isPartner && (

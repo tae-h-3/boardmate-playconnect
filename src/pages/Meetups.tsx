@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 export default function Meetups() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterType, setFilterType] = useState<string>("All");
+  const [filterType, setFilterType] = useState<string>("전체");
   const [joinedMeetups, setJoinedMeetups] = useState<string[]>(
     meetups.filter(m => m.participants.includes(currentUser.id)).map(m => m.id)
   );
@@ -37,7 +37,7 @@ export default function Meetups() {
   const filteredMeetups = meetups.filter(meetup => {
     const matchesSearch = meetup.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          meetup.location.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = filterType === "All" || meetup.gameType === filterType;
+    const matchesType = filterType === "전체" || meetup.gameType === filterType;
     return matchesSearch && matchesType;
   });
 
