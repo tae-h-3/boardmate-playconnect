@@ -26,7 +26,7 @@ export default function Meetups() {
     time: "",
     location: "",
     maxParticipants: "",
-    gameType: "Strategy",
+    gameType: "전략",
     description: "",
     linkCafe: false,
     cafeId: ""
@@ -59,7 +59,7 @@ export default function Meetups() {
       time: "",
       location: "",
       maxParticipants: "",
-      gameType: "Strategy",
+      gameType: "전략",
       description: "",
       linkCafe: false,
       cafeId: ""
@@ -147,7 +147,7 @@ export default function Meetups() {
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center gap-2 text-sm">
                       <Calendar className="w-4 h-4 text-primary" />
-                      <span>{new Date(meetup.date).toLocaleDateString()} at {meetup.time}</span>
+                      <span>{new Date(meetup.date).toLocaleDateString()} {meetup.time}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <MapPin className="w-4 h-4 text-secondary" />
