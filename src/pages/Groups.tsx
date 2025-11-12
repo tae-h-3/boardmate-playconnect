@@ -6,6 +6,11 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Users, ExternalLink, Search } from "lucide-react";
 import { Group } from "@/types";
+import groupStrategy from "@/assets/group-strategy.jpg";
+import groupUniversity from "@/assets/group-university.jpg";
+import groupProfessionals from "@/assets/group-professionals.jpg";
+import groupCooperative from "@/assets/group-cooperative.jpg";
+import groupFamily from "@/assets/group-family.jpg";
 
 // Dummy data
 const groups: Group[] = [
@@ -13,7 +18,7 @@ const groups: Group[] = [
     id: "g1",
     name: "서울 보드게임 동호회",
     description: "주말마다 모여서 다양한 전략 게임을 즐기는 동호회입니다. 초보자부터 전문가까지 환영합니다!",
-    imageUrl: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800&q=80",
+    imageUrl: groupStrategy,
     region: "서울",
     district: "강남구",
     memberCount: 45,
@@ -25,7 +30,7 @@ const groups: Group[] = [
     id: "g2",
     name: "연세대 보드게임 동아리",
     description: "연세대학교 학생들의 보드게임 동아리. 매주 화요일과 목요일에 정기 모임을 갖습니다.",
-    imageUrl: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&q=80",
+    imageUrl: groupUniversity,
     region: "서울",
     district: "서대문구",
     memberCount: 28,
@@ -37,7 +42,7 @@ const groups: Group[] = [
     id: "g3",
     name: "부산 주말 게임 모임",
     description: "부산 지역 직장인들의 자율 모임. 가벼운 파티 게임부터 깊이 있는 전략 게임까지!",
-    imageUrl: "https://images.unsplash.com/photo-1611891487688-249d1d3e0a4d?w=800&q=80",
+    imageUrl: groupProfessionals,
     region: "부산",
     district: "해운대구",
     memberCount: 32,
@@ -49,7 +54,7 @@ const groups: Group[] = [
     id: "g4",
     name: "성균관대 협동게임 동아리",
     description: "협동 보드게임을 주로 즐기는 동아리입니다. 팬데믹, 스피릿 아일랜드 등을 플레이합니다.",
-    imageUrl: "https://images.unsplash.com/photo-1632501641765-e568d28b0015?w=800&q=80",
+    imageUrl: groupCooperative,
     region: "서울",
     district: "종로구",
     memberCount: 22,
@@ -61,7 +66,7 @@ const groups: Group[] = [
     id: "g5",
     name: "인천 패밀리 게임 동호회",
     description: "가족 단위로 참여 가능한 보드게임 동호회. 아이들과 함께 즐길 수 있는 게임 위주입니다.",
-    imageUrl: "https://images.unsplash.com/photo-1606503153255-59d7e12aa0ba?w=800&q=80",
+    imageUrl: groupFamily,
     region: "인천",
     district: "남동구",
     memberCount: 38,
