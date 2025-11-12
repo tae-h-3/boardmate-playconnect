@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { MapPin, Star, Users, Clock, Search, Phone, Wifi, CreditCard } from "lucide-react";
 import { Cafe } from "@/types";
 import { useNavigate } from "react-router-dom";
+import cafeGangnam from "@/assets/cafe-gangnam.jpg";
+import cafeHongdae from "@/assets/cafe-hongdae.jpg";
+import cafeLounge from "@/assets/cafe-lounge.jpg";
 
 const dummyCafes: Cafe[] = [
   {
@@ -16,7 +19,7 @@ const dummyCafes: Cafe[] = [
     district: "강남구",
     openingHours: "12:00 - 23:00",
     availableGames: ["카탄", "스플렌더", "다빈치코드", "루미큐브", "할리갈리"],
-    imageUrl: "https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800",
+    imageUrl: cafeGangnam,
     rating: 4.8,
     pricePerHour: 8000,
     totalTables: 12,
@@ -33,7 +36,7 @@ const dummyCafes: Cafe[] = [
     district: "마포구",
     openingHours: "13:00 - 24:00",
     availableGames: ["젠가", "디셉션", "레지스탕스", "아발론", "뱅"],
-    imageUrl: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800",
+    imageUrl: cafeHongdae,
     rating: 4.6,
     pricePerHour: 10000,
     totalTables: 8,
@@ -50,7 +53,7 @@ const dummyCafes: Cafe[] = [
     district: "송파구",
     openingHours: "11:00 - 22:00",
     availableGames: ["윙스팬", "아그리콜라", "푸에르토리코", "테라포밍 마스", "7 Wonders"],
-    imageUrl: "https://images.unsplash.com/photo-1606503153255-59d6b3a06d18?w=800",
+    imageUrl: cafeLounge,
     rating: 4.9,
     pricePerHour: 7000,
     totalTables: 15,
