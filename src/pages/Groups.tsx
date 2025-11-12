@@ -152,6 +152,10 @@ export default function Groups() {
                 <img
                   src={group.imageUrl}
                   alt={group.name}
+                  loading="lazy"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = "/placeholder.svg";
+                  }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-3 right-3">
