@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,8 +12,15 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 export default function Meetups() {
   const navigate = useNavigate();
+  const mapRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState<string>("전체");
   const [joinedMeetups, setJoinedMeetups] = useState<string[]>(
@@ -40,6 +47,43 @@ export default function Meetups() {
     const matchesType = filterType === "전체" || meetup.gameType === filterType;
     return matchesSearch && matchesType;
   });
+
+  useEffect(() => {
+    if (mapRef.current && window.kakao && window.kakao.maps) {
+      const container = mapRef.current;
+      const options = {
+        center: new window.kakao.maps.LatLng(37.5665, 126.9780), // 서울 중심
+        level: 5
+      };
+      const map = new window.kakao.maps.Map(container, options);
+
+      // 모임 위치에 마커 추가
+      filteredMeetups.forEach((meetup) => {
+        // 실제로는 meetup.location을 좌표로 변환해야 하지만, 
+        // 데모를 위해 랜덤 위치에 마커 추가
+        const lat = 37.5665 + (Math.random() - 0.5) * 0.1;
+        const lng = 126.9780 + (Math.random() - 0.5) * 0.1;
+        const markerPosition = new window.kakao.maps.LatLng(lat, lng);
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+          map: map
+        });
+
+        // 마커에 정보창 추가
+        const infowindow = new window.kakao.maps.InfoWindow({
+          content: `<div style="padding:5px;font-size:12px;">${meetup.title}</div>`
+        });
+
+        window.kakao.maps.event.addListener(marker, 'mouseover', () => {
+          infowindow.open(map, marker);
+        });
+
+        window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+          infowindow.close();
+        });
+      });
+    }
+  }, [filteredMeetups]);
 
   const handleJoin = (meetupId: string) => {
     if (joinedMeetups.includes(meetupId)) {
@@ -108,15 +152,9 @@ export default function Meetups() {
           </div>
         </div>
 
-        {/* Map Preview */}
+        {/* Kakao Map */}
         <Card className="mb-8 overflow-hidden">
-          <div className="relative h-64 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-16 h-16 mx-auto mb-4 text-primary opacity-50" />
-              <p className="text-muted-foreground">지도 미리보기</p>
-              <p className="text-sm text-muted-foreground mt-1">구글 지도 / 카카오맵 연동</p>
-            </div>
-          </div>
+          <div ref={mapRef} className="w-full h-64"></div>
         </Card>
 
         {/* Meetups Grid */}
