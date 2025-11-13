@@ -21,12 +21,16 @@ declare global {
 export default function Meetups() {
   const navigate = useNavigate();
   const mapRef = useRef<HTMLDivElement>(null);
+  const createMapRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState<string>("전체");
   const [joinedMeetups, setJoinedMeetups] = useState<string[]>(
     meetups.filter(m => m.participants.includes(currentUser.id)).map(m => m.id)
   );
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [locationSearch, setLocationSearch] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number; address: string } | null>(null);
   const [newMeetup, setNewMeetup] = useState({
     title: "",
     date: "",
@@ -85,6 +89,59 @@ export default function Meetups() {
     }
   }, [filteredMeetups]);
 
+  // 모임 생성 지도 초기화
+  useEffect(() => {
+    if (isCreateModalOpen && createMapRef.current && window.kakao && window.kakao.maps) {
+      const container = createMapRef.current;
+      const options = {
+        center: new window.kakao.maps.LatLng(37.5665, 126.9780),
+        level: 3
+      };
+      const map = new window.kakao.maps.Map(container, options);
+
+      // 선택된 위치에 마커 표시
+      if (selectedLocation) {
+        const markerPosition = new window.kakao.maps.LatLng(selectedLocation.lat, selectedLocation.lng);
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+          map: map
+        });
+        map.setCenter(markerPosition);
+      }
+    }
+  }, [isCreateModalOpen, selectedLocation]);
+
+  // 주소 검색 함수
+  const handleLocationSearch = () => {
+    if (!locationSearch.trim() || !window.kakao) {
+      return;
+    }
+
+    const ps = new window.kakao.maps.services.Places();
+    ps.keywordSearch(locationSearch, (data: any, status: any) => {
+      if (status === window.kakao.maps.services.Status.OK) {
+        setSearchResults(data.slice(0, 5)); // 상위 5개만 표시
+      } else {
+        toast.error("검색 결과가 없습니다.");
+        setSearchResults([]);
+      }
+    });
+  };
+
+  // 검색 결과 선택
+  const handleSelectLocation = (place: any) => {
+    const location = {
+      lat: parseFloat(place.y),
+      lng: parseFloat(place.x),
+      address: place.place_name + " (" + place.address_name + ")"
+    };
+    setSelectedLocation(location);
+    setNewMeetup({ ...newMeetup, location: location.address });
+    setSearchResults([]);
+    setLocationSearch("");
+    toast.success("장소가 선택되었습니다!");
+  };
+
   const handleJoin = (meetupId: string) => {
     if (joinedMeetups.includes(meetupId)) {
       setJoinedMeetups(prev => prev.filter(id => id !== meetupId));
@@ -94,7 +151,11 @@ export default function Meetups() {
   };
 
   const handleCreateMeetup = () => {
-    console.log("Creating meetup:", newMeetup);
+    if (!newMeetup.title.trim() || !newMeetup.location.trim()) {
+      toast.error("제목과 장소를 입력해주세요.");
+      return;
+    }
+    
     toast.success("모임이 생성되었습니다!");
     setIsCreateModalOpen(false);
     setNewMeetup({
@@ -108,6 +169,9 @@ export default function Meetups() {
       linkCafe: false,
       cafeId: ""
     });
+    setSelectedLocation(null);
+    setSearchResults([]);
+    setLocationSearch("");
   };
 
   const handleShareKakao = (meetupId: string) => {
@@ -279,14 +343,50 @@ export default function Meetups() {
                 />
               </div>
             </div>
-            <div>
-              <Label htmlFor="location">장소</Label>
-              <Input
-                id="location"
-                value={newMeetup.location}
-                onChange={(e) => setNewMeetup({ ...newMeetup, location: e.target.value })}
-                placeholder="예: 시내 보드게임 카페"
-              />
+            <div className="space-y-3">
+              <Label>장소 검색</Label>
+              <div className="flex gap-2">
+                <Input
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleLocationSearch()}
+                  placeholder="카페 이름이나 주소를 검색하세요"
+                />
+                <Button type="button" onClick={handleLocationSearch} variant="secondary">
+                  <Search className="w-4 h-4" />
+                </Button>
+              </div>
+              
+              {searchResults.length > 0 && (
+                <Card className="max-h-48 overflow-y-auto">
+                  <div className="divide-y">
+                    {searchResults.map((place, idx) => (
+                      <div
+                        key={idx}
+                        className="p-3 hover:bg-muted cursor-pointer transition-colors"
+                        onClick={() => handleSelectLocation(place)}
+                      >
+                        <p className="font-semibold text-sm">{place.place_name}</p>
+                        <p className="text-xs text-muted-foreground">{place.address_name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )}
+
+              <div>
+                <Label htmlFor="location">선택된 장소</Label>
+                <Input
+                  id="location"
+                  value={newMeetup.location}
+                  onChange={(e) => setNewMeetup({ ...newMeetup, location: e.target.value })}
+                  placeholder="위에서 검색하거나 직접 입력하세요"
+                />
+              </div>
+
+              {selectedLocation && (
+                <div ref={createMapRef} className="w-full h-48 rounded-lg overflow-hidden border"></div>
+              )}
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
